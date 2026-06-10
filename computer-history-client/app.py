@@ -10,7 +10,7 @@ import markdown
 import bleach
 from agent_client import AgentClient
 
-app = Flask(__name__, template_folder='.')
+app = Flask(__name__, template_folder='..')
 
 
 def _set_external_link_attributes(attrs, new=False):
