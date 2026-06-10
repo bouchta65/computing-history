@@ -1,4 +1,5 @@
 ---
+layout: lab
 lab:
   title: Get started with agent development in Microsoft Foundry
   description: Use Microsoft Foundry to deploy a generative AI model and create an agent.

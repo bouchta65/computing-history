@@ -1,4 +1,5 @@
 ---
+layout: lab
 lab:
   title: Continue developing your agent in Visual Studio Code
   description: Use Visual Studio Code to develop and test your agent.

@@ -1,4 +1,5 @@
 ---
+layout: lab
 lab:
   title: Setup
   description: Prepare to complete the lab.

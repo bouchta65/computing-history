@@ -717,6 +717,113 @@ body:has(.docs-page) {
     max-width: none;
 }
 
+.lab-doc-body {
+    font-family: "Segoe UI", "Segoe UI Variable", Aptos, sans-serif;
+}
+
+.lab-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 0 13.5vw;
+    border-bottom: 1px solid #2b2c31;
+    background: rgba(7, 7, 8, 0.96);
+    backdrop-filter: blur(14px);
+}
+
+.lab-title-link,
+.lab-home-link {
+    color: var(--text);
+    text-decoration: none;
+}
+
+.lab-title-link {
+    font-size: clamp(23px, 2vw, 34px);
+    font-weight: 300;
+    letter-spacing: -0.045em;
+}
+
+.lab-home-link {
+    position: relative;
+    padding-left: 22px;
+    color: #b9b9c1;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.lab-home-link::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 13px;
+    height: 13px;
+    transform: translateY(-48%);
+    background: currentColor;
+    clip-path: polygon(50% 0, 100% 42%, 88% 42%, 88% 100%, 58% 100%, 58% 64%, 42% 64%, 42% 100%, 12% 100%, 12% 42%, 0 42%);
+}
+
+.lab-shell {
+    display: grid;
+    grid-template-columns: minmax(170px, 220px) minmax(0, 1fr);
+    gap: 42px;
+    width: min(1380px, calc(100vw - 56px));
+    margin: 0 auto;
+    padding: 46px 0 72px;
+}
+
+.lab-sidebar {
+    position: sticky;
+    top: 102px;
+    align-self: start;
+    max-height: calc(100vh - 126px);
+    overflow-y: auto;
+    padding: 34px 6px 0 0;
+}
+
+.lab-toc {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.lab-toc a {
+    color: #b8b9c0;
+    font-size: 16px;
+    font-weight: 350;
+    line-height: 1.28;
+    text-decoration: none;
+    transition: color 160ms ease, transform 160ms ease;
+}
+
+.lab-toc a:hover,
+.lab-toc a.is-active {
+    color: var(--text);
+}
+
+.lab-toc a.is-active {
+    transform: translateX(2px);
+    font-weight: 500;
+}
+
+.lab-article {
+    max-width: none;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.lab-article > h1:first-child {
+    max-width: 960px;
+}
+
 .docs-article-page .docs-nav {
     gap: 10px;
     margin-bottom: 28px;
@@ -736,31 +843,32 @@ body:has(.docs-page) {
 .docs-article h3,
 .docs-article h4 {
     color: var(--text);
-    letter-spacing: -0.04em;
-    line-height: 1.08;
+    font-weight: 300;
+    letter-spacing: -0.055em;
+    line-height: 1.18;
 }
 
 .docs-article h1 {
     margin: 0 0 22px;
-    font-size: clamp(34px, 5vw, 58px);
+    font-size: clamp(42px, 5.5vw, 68px);
 }
 
 .docs-article h2 {
-    margin: 34px 0 14px;
-    font-size: 28px;
+    margin: 42px 0 18px;
+    font-size: clamp(30px, 3vw, 42px);
 }
 
 .docs-article h3 {
-    margin: 26px 0 12px;
-    font-size: 22px;
+    margin: 30px 0 14px;
+    font-size: 25px;
 }
 
 .docs-article p,
 .docs-article li {
     color: #c6c7ce;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 1.62;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.55;
 }
 
 .docs-article p {
@@ -769,7 +877,7 @@ body:has(.docs-page) {
 
 .docs-article ul,
 .docs-article ol {
-    margin: 0 0 18px 24px;
+    margin: 0 0 22px 32px;
 }
 
 .docs-article a {
@@ -802,6 +910,26 @@ body:has(.docs-page) {
     overflow-x: auto;
     border-radius: 14px;
     background: #090a0c;
+}
+
+.docs-article.lab-article {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.docs-article blockquote {
+    margin: 24px 0;
+    padding: 22px 26px;
+    border-left: 3px solid rgba(255, 92, 26, 0.45);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.055);
+}
+
+.docs-article blockquote p {
+    margin: 0;
 }
 
 button:focus-visible {
@@ -891,6 +1019,63 @@ button:focus-visible {
 
     .docs-card {
         min-height: 122px;
+    }
+
+    .lab-topbar {
+        position: static;
+        min-height: auto;
+        align-items: flex-start;
+        padding: 16px;
+    }
+
+    .lab-title-link {
+        font-size: 22px;
+        line-height: 1.15;
+    }
+
+    .lab-home-link {
+        font-size: 15px;
+        white-space: nowrap;
+    }
+
+    .lab-shell {
+        grid-template-columns: 1fr;
+        gap: 22px;
+        width: calc(100vw - 32px);
+        padding: 24px 0 54px;
+    }
+
+    .lab-sidebar {
+        position: static;
+        max-height: none;
+        padding: 0;
+    }
+
+    .lab-toc {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .lab-toc a {
+        padding: 10px 12px;
+        border: 1px solid #303139;
+        border-radius: 10px;
+        background: #15161a;
+        font-size: 14px;
+    }
+
+    .docs-article h1 {
+        font-size: 38px;
+    }
+
+    .docs-article h2 {
+        font-size: 29px;
+    }
+
+    .docs-article p,
+    .docs-article li {
+        font-size: 17px;
     }
 }
 

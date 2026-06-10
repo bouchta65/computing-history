@@ -143,14 +143,68 @@ def instruction_page(lab_name):
             <title>{{ title }}</title>
             <link rel="stylesheet" href="/computer-history-client/static/style.css">
         </head>
-        <body class="docs-body">
-            <main class="docs-page docs-article-page">
-                <nav class="docs-nav" aria-label="Documentation navigation">
-                    <a class="docs-back-link" href="/documentation.html">Back to documentation</a>
-                    <a class="docs-back-link" href="/">Back to chat</a>
-                </nav>
-                <article class="docs-article">{{ content_html|safe }}</article>
+        <body class="docs-body lab-doc-body">
+            <header class="lab-topbar">
+                <a class="lab-title-link" href="/documentation.html">
+                    Develop your first agent with Microsoft Foundry
+                </a>
+                <a class="lab-home-link" href="/documentation.html">Home</a>
+            </header>
+
+            <main class="lab-shell">
+                <aside class="lab-sidebar" aria-label="Page sections">
+                    <nav id="labToc" class="lab-toc"></nav>
+                </aside>
+
+                <article id="labArticle" class="docs-article lab-article">{{ content_html|safe }}</article>
             </main>
+            <script>
+                const article = document.getElementById('labArticle');
+                const toc = document.getElementById('labToc');
+
+                if (article && toc) {
+                    const headings = [];
+
+                    article.querySelectorAll('h2').forEach((heading) => {
+                        if (!heading.id) {
+                            heading.id = heading.textContent
+                                .toLowerCase()
+                                .trim()
+                                .replace(/[^a-z0-9]+/g, '-')
+                                .replace(/^-|-$/g, '');
+                        }
+
+                        const link = document.createElement('a');
+                        link.href = `#${heading.id}`;
+                        link.textContent = heading.textContent;
+                        toc.appendChild(link);
+                        headings.push({ heading, link });
+                    });
+
+                    if (headings.length) {
+                        headings[0].link.classList.add('is-active');
+
+                        const setActiveLink = (id) => {
+                            headings.forEach(({ link }) => {
+                                link.classList.toggle('is-active', link.getAttribute('href') === `#${id}`);
+                            });
+                        };
+
+                        const observer = new IntersectionObserver((entries) => {
+                            entries.forEach((entry) => {
+                                if (entry.isIntersecting) {
+                                    setActiveLink(entry.target.id);
+                                }
+                            });
+                        }, {
+                            rootMargin: '-18% 0px -70% 0px',
+                            threshold: 0
+                        });
+
+                        headings.forEach(({ heading }) => observer.observe(heading));
+                    }
+                }
+            </script>
         </body>
         </html>
         """,

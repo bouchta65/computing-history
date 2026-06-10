@@ -1,4 +1,5 @@
 ---
+layout: lab
 lab:
   title: Use your agent in a client application
   description: Use your published agent in a client application.
