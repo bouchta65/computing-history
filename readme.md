@@ -19,6 +19,8 @@ By the end of the lab, you will have:
 
 **Create your first AI agent with Microsoft Foundry. Learn how to set up Azure and Foundry resources, deploy a model, create a prompt agent, continue development in Visual Studio Code, and connect the agent to a Python Flask chatbot client.**
 
+Hosted documentation: [https://bouchta65.github.io/computing-history/documentation.html](https://bouchta65.github.io/computing-history/documentation.html)
+
 ## Prerequisites
 
 Before starting, make sure you have:
