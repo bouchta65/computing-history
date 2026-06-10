@@ -7,7 +7,7 @@
     <title>Computing History Agent</title>
     <link rel="icon"
         href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23ff5c1a'/%3E%3Ctext x='50' y='62' text-anchor='middle' font-size='38' font-family='Arial' font-weight='700' fill='%23141518'%3ECH%3C/text%3E%3C/svg%3E">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="computer-history-client/static/style.css">
 </head>
 
 <body>
@@ -38,6 +38,7 @@
             </div>
 
             <div class="auth-actions" aria-label="Account actions">
+                <a class="docs-btn" href="documentation.html">Documentation</a>
                 <button class="signin-btn" type="button">Sign in</button>
                 <button class="signup-btn" type="button">Sign up</button>
             </div>
@@ -117,7 +118,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="computer-history-client/static/script.js"></script>
 </body>
 
 </html>
