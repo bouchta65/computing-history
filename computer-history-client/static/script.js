@@ -3,6 +3,7 @@ const messageInput = document.getElementById('messageInput');
 const sendBtn = document.getElementById('sendBtn');
 const chatMessages = document.getElementById('chatMessages');
 const resetBtn = document.getElementById('resetBtn');
+const setupHelpHtml = 'Your agent is not connected yet. Read the documentation to create your first AI agent, publish it, and add the endpoint to your <code>.env</code> file: <a href="documentation.html">Open documentation</a>';
 
 // Event listeners
 sendBtn.addEventListener('click', sendMessage);
@@ -95,7 +96,7 @@ function sendMessage() {
         })
         .catch(error => {
             typingIndicator.remove();
-            addMessage(`Error: ${error.message}`, 'agent');
+            addMessage(setupHelpHtml, 'agent', { isHtml: true });
             setInputDisabled(false);
             messageInput.focus();
         });

@@ -22,6 +22,12 @@ app = Flask(
     static_url_path='/computer-history-client/static',
 )
 
+AGENT_SETUP_MESSAGE = (
+    'Your agent is not connected yet. '
+    'Read the documentation to create your first AI agent, publish it, and add the endpoint to your `.env` file: '
+    '[Open documentation](documentation.html)'
+)
+
 
 def _set_external_link_attributes(attrs, new=False):
     """Force safe external link attributes for rendered markdown links."""
@@ -109,6 +115,7 @@ except Exception as e:
     agent = None
 
 @app.route('/')
+@app.route('/index.html')
 def index():
     """Render the main chat interface."""
     return render_template('index.html')
@@ -152,7 +159,7 @@ def instruction_page(lab_name):
             </header>
 
             <main class="lab-shell">
-                <aside class="lab-sidebar" aria-label="Page sections">
+                <aside id="labTocPanel" class="lab-sidebar" aria-label="Page sections">
                     <nav id="labToc" class="lab-toc"></nav>
                 </aside>
 
@@ -204,6 +211,7 @@ def instruction_page(lab_name):
                         headings.forEach(({ heading }) => observer.observe(heading));
                     }
                 }
+
             </script>
         </body>
         </html>
@@ -221,9 +229,11 @@ def instruction_media(filename):
 def chat():
     """Handle chat messages from the user."""
     if not agent:
+        response_html = render_markdown_to_safe_html(AGENT_SETUP_MESSAGE)
         return jsonify({
-            'error': 'Agent client not initialized. Check your .env configuration.'
-        }), 500
+            'response': AGENT_SETUP_MESSAGE,
+            'response_html': response_html
+        })
     
     data = request.json
     user_message = data.get('message', '').strip()
@@ -242,7 +252,11 @@ def chat():
     try:
         response = agent.send_message(user_message)
     except RuntimeError as e:
-        return jsonify({'error': str(e)}), 502
+        response_html = render_markdown_to_safe_html(AGENT_SETUP_MESSAGE)
+        return jsonify({
+            'response': AGENT_SETUP_MESSAGE,
+            'response_html': response_html
+        })
 
     response_html = render_markdown_to_safe_html(response)
 
